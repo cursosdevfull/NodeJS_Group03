@@ -1,22 +1,23 @@
-import { Medic } from '../domain/entities/medic.entity';
-import { MedicRepository } from '../domain/repositories/medic.repository';
+import { GenericOperation } from "../../generic/generic.operation";
+import { Medic } from "../domain/entities/medic.entity";
+/* import { MedicRepository } from "../domain/repositories/medic.repository"; */
 
-export default class MedicOperation implements MedicRepository {
-  insert(medic: Medic): Medic {
+export class MedicOperation implements GenericOperation<Medic> {
+  async insert(medic: Medic): Promise<Medic> {
     return medic;
   }
-  update(id: string | number, medic: Medic): Medic {
+  async update(id: string | number, medic: Medic): Promise<Medic> {
     return medic;
   }
-  get(isActive: boolean): Medic[] {
+  async get(isActive: boolean): Promise<Medic[]> {
     const listMedic: Medic[] = [];
     return listMedic;
   }
-  getOne(id: string | number): Medic {
+  async getOne(id: string | number): Promise<Medic> {
     const medic: Medic = {};
     return medic;
   }
-  delete(id: string | number): Medic {
+  async delete(id: string | number): Promise<Medic> {
     const medic: Medic = {};
     return medic;
   }

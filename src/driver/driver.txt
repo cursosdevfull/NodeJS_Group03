@@ -1,0 +1,6 @@
+name,
+surname,
+lastname,
+photo,
+isActive,
+locations

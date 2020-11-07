@@ -5,6 +5,25 @@ const app = express();
 
 app.use("/medics", RouterMedic);
 
+/* const autorizacion = (...rolesAllowed) => {
+    return (req, res, next) => {
+        const roleUser = "OPERATOR"
+        if(rolesAllowed.indexOf(roleUser) > -1) {
+            return next()
+        }
+
+        return res.status(403).send("No tienes los privilegios necesarios")
+    }
+} */
+
+/* app.get("/medics", 
+autorizacion("ADMINISTRATOR","MEDIC"),
+
+(req, res) => {
+    res.json([])
+})
+ */
+
 /* app.get("/", (request, response) => {
   response.send("Call to method get");
 });
