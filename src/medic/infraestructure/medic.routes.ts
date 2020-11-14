@@ -11,51 +11,55 @@ const medicController = new MedicController(medicUseCase);
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const result = medicController.getAll(true);
+  const result = await medicController.getAll(true);
   /*   res.writeHead(200, {"content-type": "application/json"})
   res.end(JSON.stringify(result)) */
   res.json(result);
 });
 
 router.get("/:id", async (req, res) => {
-  const result = await medicController.getOne(1);
+  const id = req.params.id;
+  const result = await medicController.getOne(id);
   res.json(result);
 });
 
 router.post("/", async (req, res) => {
+  const {
+    name,
+    surname,
+    lastname,
+    cmp,
+    dni,
+    email,
+    photo,
+    locations,
+  } = req.body;
+
   const medic: Medic = {
-    name: "Sergio",
-    surname: "Iván",
-    lastname: "Hidalgo",
-    cmp: "12345",
-    dni: "12345678",
-    email: "sergiohidalgocaceres@gmail.com",
-    photo: "sergio.jpg",
+    name,
+    surname,
+    lastname,
+    cmp,
+    dni,
+    email,
+    photo,
+    locations,
     isActive: true,
-    locations: ["LIMA", "TRUJILLO"],
   };
   const result = await medicController.insert(medic);
   res.json(result);
 });
 
 router.put("/:id", async (req, res) => {
-  const medic: Medic = {
-    name: "Sergio",
-    surname: "Iván",
-    lastname: "Hidalgo",
-    cmp: "12345",
-    dni: "12345678",
-    email: "sergiohidalgocaceres@gmail.com",
-    photo: "sergio.jpg",
-    isActive: true,
-    locations: ["LIMA", "TRUJILLO"],
-  };
-  const result = await medicController.update(1, medic);
+  const medic: Medic = req.body;
+  const id = req.params.id;
+  const result = await medicController.update(id, medic);
   res.json(result);
 });
 
 router.delete("/:id", async (req, res) => {
-  const result = await medicController.delete(1);
+  const id = req.params.id;
+  const result = await medicController.delete(id);
   res.json(result);
 });
 

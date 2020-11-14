@@ -5,22 +5,30 @@ export class MedicUseCase {
   constructor(private readonly repository: MedicRepository) {}
 
   async insert(medic: Medic) {
-    return this.repository.insert(medic);
+    const result = await this.repository.insert(medic);
+    return result;
   }
 
   async getAll(isActive: boolean) {
-    return this.repository.get(isActive);
+    const results = await this.repository.getAll({ isActive: true });
+
+    return results;
   }
 
   async getOne(id: string | number) {
-    return this.repository.getOne(id);
+    const result = await this.repository.getById(id);
+    return result;
   }
 
   async update(id: string | number, medic: Medic) {
-    return this.repository.update(id, medic);
+    const result = this.repository.update(id, medic);
+    return result;
   }
 
   async delete(id: string | number) {
-    return this.repository.delete(id);
+    const result = await this.repository.delete(id);
+    return result;
   }
+
+  async getByLocations() {}
 }

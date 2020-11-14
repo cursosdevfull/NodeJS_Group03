@@ -16,6 +16,7 @@ export class MedicController {
   }
 
   async update(id: string | number, medic: Medic) {
+    console.log("medic", medic);
     return this.medicUseCase.update(id, medic);
   }
 
