@@ -1,13 +1,17 @@
-import { Medic } from "../domain/entities/medic.entity";
-import { MedicRepository } from "../domain/repositories/medic.repository";
+import { User } from "../domain/entities/user.entity";
+import { UserRepository } from "../domain/repositories/user.repository";
+import bcrypt from "bcryptjs";
 import yenv from "yenv";
 
 const env = yenv();
-export class MedicUseCase {
-  constructor(private readonly repository: MedicRepository) {}
+export class UserUseCase {
+  constructor(private readonly repository: UserRepository) {}
 
-  async insert(medic: Medic) {
-    const result = await this.repository.insert(medic);
+  async insert(user: User) {
+    const password = await bcrypt.hash(user.password, 10);
+    user.password = password;
+
+    const result = await this.repository.insert(user);
     return result;
   }
 
@@ -31,8 +35,8 @@ export class MedicUseCase {
     return result;
   }
 
-  async update(id: string | number, medic: Medic) {
-    const result = this.repository.update(id, medic);
+  async update(id: string | number, user: User) {
+    const result = this.repository.update(id, user);
     return result;
   }
 
@@ -40,6 +44,4 @@ export class MedicUseCase {
     const result = await this.repository.delete(id);
     return result;
   }
-
-  async getByLocations() {}
 }

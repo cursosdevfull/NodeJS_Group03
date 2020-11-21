@@ -1,5 +1,7 @@
 import express from "express";
+import { Errors } from "./helpers/errors.helper";
 import { router as RouterMedic } from "./medic/infraestructure/medic.routes";
+import { router as RouterUser } from "./user/infraestructure/user.routes";
 
 const app = express();
 
@@ -7,32 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/medics", RouterMedic);
+app.use("/users", RouterUser);
 
-/* const autorizacion = (...rolesAllowed) => {
-    return (req, res, next) => {
-        const roleUser = "OPERATOR"
-        if(rolesAllowed.indexOf(roleUser) > -1) {
-            return next()
-        }
+app.use(Errors.pathNotFoundError);
 
-        return res.status(403).send("No tienes los privilegios necesarios")
-    }
-} */
+app.use(Errors.genericError);
 
-/* app.get("/medics", 
-autorizacion("ADMINISTRATOR","MEDIC"),
-
-(req, res) => {
-    res.json([])
-})
- */
-
-/* app.get("/", (request, response) => {
-  response.send("Call to method get");
-});
-
-app.get("/users", (request, response) => {
-  response.json([{ user: "user01" }, { user: "user02" }]);
-});
- */
 export default app;
