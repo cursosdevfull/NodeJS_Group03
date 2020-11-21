@@ -2,11 +2,12 @@ import { GenericOperation } from "../../generic/generic.operation";
 import GenericDatabaseRepository from "../../repositories/generic.repository";
 import { Medic } from "../domain/entities/medic.entity";
 import MedicModel from "./medic.model";
+import { MedicType } from "./medic.type";
 /* import { MedicRepository } from "../domain/repositories/medic.repository"; */
 
 export class MedicOperation extends GenericDatabaseRepository<
   typeof MedicModel,
-  Medic
+  MedicType
 > {
   constructor() {
     super(MedicModel);
