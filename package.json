@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "develop": "nodemon src/init.ts"
+    "develop": "nodemon src/init.ts",
+    "start": "nodemon src/init.ts"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,10 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "joi": "^17.3.0",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.14",
+    "uuid": "^8.3.1",
     "yenv": "^2.1.1"
   },
   "devDependencies": {
@@ -30,6 +34,7 @@
     "@types/joi": "^14.3.4",
     "@types/mongoose": "^5.10.0",
     "@types/node": "^14.14.6",
+    "@types/uuid": "^8.3.0",
     "nodemon": "^2.0.6",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"

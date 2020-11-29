@@ -1,17 +1,13 @@
-import { User } from "../domain/entities/user.entity";
-import { UserRepository } from "../domain/repositories/user.repository";
-import bcrypt from "bcryptjs";
+import { Role } from "../domain/entities/role.entity";
+import { RoleRepository } from "../domain/repositories/role.repository";
 import yenv from "yenv";
-import { Tokens } from "../../auth/application/auth.service";
 
 const env = yenv();
-export class UserUseCase {
-  constructor(private readonly repository: UserRepository) {}
+export class RoleUseCase {
+  constructor(private readonly repository: RoleRepository) {}
 
-  async insert(user: User) {
-    user.refreshToken = Tokens.generateRefreshToken();
-
-    const result = await this.repository.insert(user);
+  async insert(role: Role) {
+    const result = await this.repository.insert(role);
     return result;
   }
 
@@ -35,8 +31,8 @@ export class UserUseCase {
     return result;
   }
 
-  async update(id: string | number, user: User) {
-    const result = this.repository.update(id, user);
+  async update(id: string | number, role: Role) {
+    const result = this.repository.update(id, role);
     return result;
   }
 

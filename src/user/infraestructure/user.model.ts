@@ -32,6 +32,13 @@ const schema: Schema = new Schema({
     type: String,
     default: "",
   },
+
+  roles: [
+    {
+      type: Schema.Types.ObjectId,
+      Ref: "Role",
+    },
+  ],
 });
 
 export default mongoose.model("User", schema);

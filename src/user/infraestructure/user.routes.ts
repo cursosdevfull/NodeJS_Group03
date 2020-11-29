@@ -6,6 +6,7 @@ import SchemaValidator from "../../validators/schema.validator";
 import { schemas as UserSchema } from "./user.schema";
 import { Errors } from "../../helpers/errors.helper";
 import { UserUseCase } from "../application/user.usercase";
+import { AuthenticationGuard } from "../../guards/authentication.guard";
 
 const userOperation = new UserOperation();
 const userUseCase = new UserUseCase(userOperation);
@@ -15,6 +16,7 @@ const router = express.Router();
 
 router.get(
   "/",
+  AuthenticationGuard.canActivate,
   Errors.asyncError(async (req, res) => {
     const result = await userController.getAll(true);
     res.json(result);
@@ -45,11 +47,12 @@ router.post(
   "/",
   SchemaValidator.validate(UserSchema.POST_INSERT),
   Errors.asyncError(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, roles } = req.body;
     const user: User = {
       name,
       email,
       password,
+      roles,
       isActive: true,
     };
     const result = await userController.insert(user);

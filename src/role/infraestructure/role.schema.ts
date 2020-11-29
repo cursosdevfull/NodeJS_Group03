@@ -4,9 +4,6 @@ export const schemas = {
   POST_INSERT: {
     body: Joi.object({
       name: Joi.string().required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-      roles: Joi.array().required(),
     }),
   },
   UPDATE: {
@@ -15,9 +12,6 @@ export const schemas = {
     }),
     body: Joi.object({
       name: Joi.string(),
-      email: Joi.string().email(),
-      password: Joi.string(),
-      roles: Joi.array(),
     }),
   },
   GET_ONE: {

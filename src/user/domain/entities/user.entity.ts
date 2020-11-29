@@ -2,6 +2,7 @@ export interface User {
   name?: string;
   email?: string;
   password?: string;
-  isActive: boolean;
+  isActive?: boolean;
   refreshToken?: string;
+  roles?: Array<any>;
 }
