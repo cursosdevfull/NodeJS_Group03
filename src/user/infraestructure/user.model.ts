@@ -36,7 +36,7 @@ const schema: Schema = new Schema({
   roles: [
     {
       type: Schema.Types.ObjectId,
-      Ref: "Role",
+      ref: "Role",
     },
   ],
 });

@@ -44,6 +44,6 @@ export class Tokens {
       }
     });
 
-    await promiseValidate;
+    return promiseValidate;
   }
 }

@@ -5,4 +5,5 @@ export interface User {
   isActive?: boolean;
   refreshToken?: string;
   roles?: Array<any>;
+  photo?: string;
 }

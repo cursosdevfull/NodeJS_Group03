@@ -5,10 +5,9 @@ import { Tokens } from "../auth/application/auth.service";
 
 export class AuthenticationGuard {
   static canActivate(req: Request, res: Response, next: NextFunction) {
+    console.log(req.body);
     const headers = req.headers;
     const authorization: any = headers["authorization"];
-
-    //Bearer xxxxxxxx
 
     if (authorization) {
       const partsAuthorization = authorization.split(" ");

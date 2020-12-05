@@ -7,7 +7,7 @@ export class AuthOperation implements AuthRepository {
   async login(user: User): Promise<User> {
     const response: UserType = await UserModel.findOne({
       email: user.email,
-    });
+    }).populate("roles");
 
     return response;
   }
