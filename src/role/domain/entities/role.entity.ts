@@ -1,4 +1,4 @@
 export interface Role {
-  name?: string;
-  isActive?: boolean;
+	name?: string;
+	isActive?: boolean;
 }

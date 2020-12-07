@@ -1,4 +1,4 @@
 export interface DatabaseRepository {
-  initialize(): Promise<any>;
-  disconnect(): void;
+	initialize(): Promise<any>;
+	disconnect(): void;
 }

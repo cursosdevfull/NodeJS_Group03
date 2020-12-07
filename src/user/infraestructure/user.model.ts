@@ -1,44 +1,45 @@
-import { required } from "joi";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const schema: Schema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+	name: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 
-  email: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
-    email: true,
-    unique: true,
-  },
+	email: {
+		type: String,
+		required: true,
+		trim: true,
+		lowercase: true,
+		email: true,
+		unique: true,
+	},
 
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+	password: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
+	isActive: {
+		type: Boolean,
+		default: true,
+	},
 
-  refreshToken: {
-    type: String,
-    default: "",
-  },
+	refreshToken: {
+		type: String,
+		default: '',
+	},
 
-  roles: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Role",
-    },
-  ],
+	photo: String,
+
+	roles: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Role',
+		},
+	],
 });
 
-export default mongoose.model("User", schema);
+export default mongoose.model('User', schema);

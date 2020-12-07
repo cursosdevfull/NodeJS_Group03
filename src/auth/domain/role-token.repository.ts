@@ -1,3 +1,3 @@
 export interface RoleTokenRepository {
-  name: string;
+	name: string;
 }

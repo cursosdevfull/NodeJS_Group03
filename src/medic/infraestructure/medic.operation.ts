@@ -1,15 +1,15 @@
-import GenericDatabaseRepository from "../../repositories/generic.repository";
-import MedicModel from "./medic.model";
-import { MedicType } from "./medic.type";
+import GenericDatabaseRepository from '../../repositories/generic.repository';
+import MedicModel from './medic.model';
+import { MedicType } from './medic.type';
 export class MedicOperation extends GenericDatabaseRepository<
-  typeof MedicModel,
-  MedicType
+	typeof MedicModel,
+	MedicType
 > {
-  constructor() {
-    super(MedicModel);
-  }
+	constructor() {
+		super(MedicModel);
+	}
 
-  getByLocations() {
-    console.log("List medics by locations");
-  }
+	getByLocations() {
+		console.log('List medics by locations');
+	}
 }

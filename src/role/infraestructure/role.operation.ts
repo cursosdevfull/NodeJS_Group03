@@ -1,11 +1,11 @@
-import GenericDatabaseRepository from "../../repositories/generic.repository";
-import RoleModel from "./role.model";
-import { RoleType } from "./role.type";
+import GenericDatabaseRepository from '../../repositories/generic.repository';
+import RoleModel from './role.model';
+import { RoleType } from './role.type';
 export class RoleOperation extends GenericDatabaseRepository<
-  typeof RoleModel,
-  RoleType
+	typeof RoleModel,
+	RoleType
 > {
-  constructor() {
-    super(RoleModel);
-  }
+	constructor() {
+		super(RoleModel);
+	}
 }

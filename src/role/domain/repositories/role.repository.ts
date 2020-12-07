@@ -1,4 +1,4 @@
-import { IRepository } from "../../../repositories/irepository";
-import { Role } from "../entities/role.entity";
+import { IRepository } from '../../../repositories/irepository';
+import { Role } from '../entities/role.entity';
 
-export interface RoleRepository extends IRepository<Role> {}
+export type RoleRepository = IRepository<Role>;

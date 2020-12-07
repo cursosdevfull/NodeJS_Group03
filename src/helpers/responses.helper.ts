@@ -1,4 +1,4 @@
-import { response } from "express";
+/* import { response } from "express";
 
 export class Responses {
   static sentOk(results: any | any[]) {
@@ -18,3 +18,4 @@ export class Responses {
 
   static sentNotAuthenticated(message: string) {}
 }
+ */

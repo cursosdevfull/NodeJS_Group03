@@ -1,0 +1,6 @@
+projectKey=CursoNodeJS
+serverUrl=http://localhost:9000
+serverVersion=8.5.1.38104
+dashboardUrl=http://localhost:9000/dashboard?id=CursoNodeJS
+ceTaskId=AXY0SsKf0VH-QcVSMbEn
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXY0SsKf0VH-QcVSMbEn

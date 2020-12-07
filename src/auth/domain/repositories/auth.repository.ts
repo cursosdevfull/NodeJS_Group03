@@ -1,5 +1,5 @@
-import { User } from "../../../user/domain/entities/user.entity";
+import { User } from '../../../user/domain/entities/user.entity';
 
 export interface AuthRepository {
-  login(user: User): Promise<User>;
+	login(user: User): Promise<User>;
 }

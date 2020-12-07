@@ -1,24 +1,24 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 export class AuthorizationGuard {
-  static canActivate(...rolesAllowed: Array<string>) {
-    return (req: Request, res: Response, next: NextFunction) => {
-      const { roles } = res.locals.payload;
+	static canActivate(...rolesAllowed: Array<string>) {
+		return (req: Request, res: Response, next: NextFunction) => {
+			const { roles } = res.locals.payload;
 
-      // canActivate("ADMIN", "AUDITOR")
+			// canActivate("ADMIN", "AUDITOR")
 
-      let roleMatched = false;
+			let roleMatched = false;
 
-      roles.forEach((role: { [s: string]: string }) => {
-        if (rolesAllowed.indexOf(role.name) > -1) {
-          roleMatched = true;
-          next();
-        }
-      });
+			roles.forEach((role: { [s: string]: string }) => {
+				if (rolesAllowed.indexOf(role.name) > -1) {
+					roleMatched = true;
+					next();
+				}
+			});
 
-      if (!roleMatched) {
-        res.status(409).send("User not authorized");
-      }
-    };
-  }
+			if (!roleMatched) {
+				res.status(409).send('User not authorized');
+			}
+		};
+	}
 }
