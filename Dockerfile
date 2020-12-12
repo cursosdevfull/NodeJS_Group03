@@ -17,6 +17,8 @@ RUN npm run server:build
 
 FROM node:10.16.3-alpine
 
+LABEL DEV=SERGIO
+
 RUN apk add bash
 
 RUN mkdir /app
