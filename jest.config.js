@@ -21,7 +21,11 @@ module.exports = {
 		],
 	],
 	collectCoverage: true,
-	collectCoverageFrom: [`src/**/*.ts`, `!**/node_modules/**`],
+	collectCoverageFrom: [
+		`src/**/*.ts`,
+		`!**/node_modules/**`,
+		`!src/**/*.entity.ts`,
+	],
 	coverageReporters: [`json`, `text`, `html`, 'lcov'],
 	coverageDirectory: `reports/coverage`,
 	testPathIgnorePatterns: [`/node_modules/`],

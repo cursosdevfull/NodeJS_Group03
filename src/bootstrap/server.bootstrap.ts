@@ -1,7 +1,9 @@
 import http from 'http';
 import { AddressInfo } from 'net';
 import { Application } from 'express';
+import yenv from 'yenv';
 
+const env = yenv();
 interface Address extends AddressInfo {
 	port: number;
 }
@@ -28,7 +30,7 @@ export default class Server {
 
 			const server: http.Server = http.createServer(this.app);
 			server
-				.listen(3000)
+				.listen(env.PORT)
 				.on('listening', () => {
 					console.log(
 						`Server is running on port:  ${(server.address() as Address).port}`

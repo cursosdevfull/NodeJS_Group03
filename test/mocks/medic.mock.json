@@ -1,0 +1,57 @@
+[
+	{
+		"name": "Carlos",
+		"surname": "Oswaldo",
+		"lastname": "Pérez",
+		"cmp": "21546",
+		"dni": "45756235",
+		"email": "carlos.perez@dominio.com",
+		"photo": "carlosperez.jpg",
+		"isActive": true,
+		"locations": ["Lima", "Trujillo"]
+	},
+	{
+		"name": "Juan",
+		"surname": "Oswaldo",
+		"lastname": "Rueda",
+		"cmp": "21546",
+		"dni": "45756235",
+		"email": "carlos.perez@dominio.com",
+		"photo": "carlosperez.jpg",
+		"isActive": true,
+		"locations": ["Lima", "Trujillo"]
+	},
+	{
+		"name": "Mery",
+		"surname": "Oswaldo",
+		"lastname": "Cardenas",
+		"cmp": "21546",
+		"dni": "45756235",
+		"email": "carlos.perez@dominio.com",
+		"photo": "carlosperez.jpg",
+		"isActive": true,
+		"locations": ["Lima", "Trujillo"]
+	},
+	{
+		"name": "Raúl",
+		"surname": "Oswaldo",
+		"lastname": "Cabanillas",
+		"cmp": "21546",
+		"dni": "45756235",
+		"email": "carlos.perez@dominio.com",
+		"photo": "carlosperez.jpg",
+		"isActive": true,
+		"locations": ["Lima", "Trujillo"]
+	},
+	{
+		"name": "Amanda",
+		"surname": "Oswaldo",
+		"lastname": "Carbajal",
+		"cmp": "21546",
+		"dni": "45756235",
+		"email": "carlos.perez@dominio.com",
+		"photo": "carlosperez.jpg",
+		"isActive": true,
+		"locations": ["Lima", "Trujillo"]
+	}
+]

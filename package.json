@@ -6,13 +6,15 @@
 	"scripts": {
 		"clean": "rimraf cache dist reports coverage",
 		"test": "cross-env NODE_ENV=test jest --coverage --passWithNoTests",
+		"test:config": "cross-env NODE_ENV=test jest --showConfig",
+		"test:clear": "cross-env NODE_ENV=test jest --clearCache",
 		"lint:report": "eslint --ext ts src/ -f html -o reports/lint.html",
 		"format": "prettier --write src/**/*.ts",
 		"format:fix": "eslint --ext ts src --fix",
 		"prebuild": "npm run clean && npm run lint:report",
 		"build": "tsc && gulp minify",
 		"server:build": "npm run prebuild && npm run build && gulp copy",
-		"server": "node dist/init.js",
+		"server": "cross-env NODE_ENV=production node dist/init.js",
 		"develop": "nodemon src/init.ts",
 		"start": "nodemon src/init.ts"
 	},
