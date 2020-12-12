@@ -17,7 +17,7 @@ RUN npm run server:build
 
 FROM node:10.16.3-alpine
 
-LABEL DEV=SERGIO
+LABEL DEV=SERGIO-HIDALGO
 
 RUN apk add bash
 
