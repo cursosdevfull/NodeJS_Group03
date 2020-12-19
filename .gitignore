@@ -3,3 +3,5 @@ dist
 cache
 reports
 testing
+coverage
+.scannerwork
