@@ -19,6 +19,8 @@ app.use('/users', RouterUser);
 app.use('/roles', RouterRole);
 app.use('/auth', RouterAuth);
 
+app.get('/health-check', (req, res) => res.send('I am alive'));
+
 app.use(Errors.pathNotFoundError);
 
 app.use(Errors.genericError);
