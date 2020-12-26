@@ -9,8 +9,7 @@ import bodyParser from 'body-parser';
 
 const app = express();
 multer();
-/* app.use(express.json());
-app.use(express.urlencoded({ extended: true })); */
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -19,7 +18,7 @@ app.use('/users', RouterUser);
 app.use('/roles', RouterRole);
 app.use('/auth', RouterAuth);
 
-app.get('/health-check', (req, res) => res.send('I am alive'));
+app.get('/health-check', (req, res) => res.send('Estoy funcionando bien'));
 
 app.use(Errors.pathNotFoundError);
 
