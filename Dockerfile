@@ -1,4 +1,4 @@
-FROM node:10.16.3-alpine as BUILD
+FROM node:14.7.0-alpine3.10 as BUILD
 
 RUN apk add bash
 
@@ -15,7 +15,7 @@ RUN npm run test
 
 RUN npm run server:build
 
-FROM node:10.16.3-alpine
+FROM node:14.7.0-alpine3.10
 
 LABEL DEV=SERGIO-HIDALGO
 
