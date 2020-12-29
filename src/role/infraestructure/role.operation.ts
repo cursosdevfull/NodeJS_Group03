@@ -1,11 +1,7 @@
 import GenericDatabaseRepository from '../../repositories/generic.repository';
-import RoleModel from './role.model';
-import { RoleType } from './role.type';
-export class RoleOperation extends GenericDatabaseRepository<
-	typeof RoleModel,
-	RoleType
-> {
+import { Role } from '../../entities/role.model';
+export class RoleOperation extends GenericDatabaseRepository<Role> {
 	constructor() {
-		super(RoleModel);
+		super(Role);
 	}
 }

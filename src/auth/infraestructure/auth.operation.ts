@@ -1,5 +1,5 @@
 import { User } from '../../user/domain/entities/user.entity';
-import UserModel from '../../user/infraestructure/user.model';
+import UserModel from '../../entities/user.model';
 import { UserType } from '../../user/infraestructure/user.type';
 import { AuthRepository } from '../domain/repositories/auth.repository';
 

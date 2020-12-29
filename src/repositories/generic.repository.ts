@@ -1,61 +1,84 @@
-import { Model } from 'mongoose';
-import { IRepository } from './irepository';
+import { getRepository, Repository } from 'typeorm';
+export type ObjectType<T> = { new (): T };
+export default abstract class GenericDatabaseRepository<T> {
+	private entity: ObjectType<T>;
 
-export default abstract class GenericDatabaseRepository<T extends Model<any>, U>
-	implements IRepository<U> {
-	private model: T;
-
-	constructor(model: T) {
-		this.model = model;
+	constructor(entity: ObjectType<T>) {
+		this.entity = entity;
 	}
 
-	async getAll(filter: any = {}): Promise<U[]> {
-		const items: U[] = await this.model.find(filter);
-		return items;
-	}
+	async getAll(
+		where: any = {},
+		relations: string[] = [],
+		order: any = {}
+	): Promise<any> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const records = await repository.find({
+			where,
+			relations,
+			order,
+		});
 
-	async getById(id: number | string): Promise<U> {
-		const item: U = await this.model.findById(id);
-		return item;
+		return records;
 	}
 
 	async getByPage(
-		filter: any,
 		page: number,
-		pageSize: number
-	): Promise<{ total: number; items: U[] }> {
-		const items: U[] = await this.model
-			.find(filter)
-			.skip(page * pageSize)
-			.limit(pageSize);
-
-		const total: number = await this.model.find(filter).count();
-
-		return { total, items };
-	}
-
-	async insert(item: U): Promise<U> {
-		const itemInserted: U = await this.model.create(item);
-		return itemInserted;
-	}
-
-	async update(id: number | string, item: U): Promise<U> {
-		console.log(id);
-		console.log(item);
-		const itemUpdated: U = await this.model.findByIdAndUpdate(id, item, {
-			new: true,
+		pageSize: number,
+		where: any = {},
+		relations: string[] = [],
+		order: any = {}
+	): Promise<any> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const [records, totalRecords] = await repository.findAndCount({
+			where,
+			order,
+			relations,
+			skip: page * pageSize,
+			take: pageSize,
 		});
-		return itemUpdated;
+
+		return [records, totalRecords];
 	}
 
-	async delete(id: number | string): Promise<U> {
-		const itemDeleted: U = await this.model.findByIdAndUpdate(
-			id,
-			{ isActive: false },
-			{
-				new: true,
+	async getById(id: number, relations: string[] = []): Promise<any> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const record = await repository.findOne(id, { relations });
+
+		return record;
+	}
+
+	async insert(record: T): Promise<any> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const recordInserted: T = await repository.save(record);
+
+		return recordInserted;
+	}
+
+	async update(record: T, where: any, relations: string[] = []): Promise<any> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const recordToUpdate = await repository.findOne({ where, relations });
+
+		for (const prop in record) {
+			if (recordToUpdate[prop]) {
+				recordToUpdate[prop] = record[prop];
 			}
-		);
-		return itemDeleted;
+		}
+
+		await repository.save(recordToUpdate);
+
+		return recordToUpdate;
+	}
+
+	async delete(id: number): Promise<any> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const recordToDelete = await repository.findOne(id);
+
+		if (recordToDelete) {
+			await repository.delete(id);
+			return recordToDelete;
+		}
+
+		return null;
 	}
 }

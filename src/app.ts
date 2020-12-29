@@ -6,6 +6,7 @@ import { router as RouterRole } from './role/infraestructure/role.routes';
 import { router as RouterAuth } from './auth/infraestructure/auth.routes';
 import multer from 'multer';
 import bodyParser from 'body-parser';
+import { clearRedis } from './bootstrap/redis.bootstrap';
 
 const app = express();
 multer();
@@ -20,6 +21,11 @@ app.use('/roles', RouterRole);
 app.use('/auth', RouterAuth);
 
 app.get('/health-check', (req, res) => res.send('I am alive'));
+
+app.get('/clear', async (req, res) => {
+	await clearRedis();
+	res.send('Redis Cache has been invalidated');
+});
 
 app.use(Errors.pathNotFoundError);
 

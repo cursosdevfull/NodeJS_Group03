@@ -1,32 +1,32 @@
 import { DatabaseRepository } from '../interfaces/database.interface';
 import mongoose from 'mongoose';
 import yenv from 'yenv';
+import { createConnection } from 'typeorm';
 
 const env = yenv();
+
+let client: any;
 
 export default class Database implements DatabaseRepository {
 	async initialize(): Promise<any> {
 		const promiseInitialize = new Promise((resolve, reject) => {
-			const connectionString = `mongodb+srv://${env.DATABASE.MONGO.USER}:${env.DATABASE.MONGO.PASS}@${env.DATABASE.MONGO.HOST}/${env.DATABASE.MONGO.DB}?retryWrites=true&w=majority`;
-
-			const options = {
-				useNewUrlParser: true,
-				useCreateIndex: true,
-				useUnifiedTopology: true,
-				useFindAndModify: true,
-				poolSize: 10,
+			const parametersConnection = {
+				type: env.TYPEORM.TYPE,
+				host: env.TYPEORM.HOST,
+				username: env.TYPEORM.USERNAME,
+				password: env.TYPEORM.PASSWORD,
+				database: env.TYPEORM.DATABASE,
+				port: env.TYPEORM.PORT,
+				entities: [env.TYPEORM.ENTITIES],
+				synchronize: env.TYPEORM.SYNCHRONIZE,
 			};
 
-			const callback = (error: any) => {
-				if (error) {
-					reject(error);
-				} else {
-					console.log('Connection Database successful');
-					resolve('Connection Database successful');
-				}
-			};
-
-			mongoose.connect(connectionString, options, callback);
+			createConnection(parametersConnection)
+				.then(connection => {
+					client = connection;
+					resolve(true);
+				})
+				.catch(error => reject(error));
 		});
 
 		await promiseInitialize;
