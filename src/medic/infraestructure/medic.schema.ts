@@ -10,7 +10,6 @@ export const schemas = {
 			dni: Joi.string().required(),
 			photo: Joi.string().required(),
 			email: Joi.string().email().required(),
-			locations: Joi.array().required(),
 		}),
 	},
 	UPDATE: {
@@ -25,7 +24,6 @@ export const schemas = {
 			dni: Joi.string(),
 			photo: Joi.string(),
 			email: Joi.string().email(),
-			locations: Joi.array(),
 		}),
 	},
 	GET_ONE: {

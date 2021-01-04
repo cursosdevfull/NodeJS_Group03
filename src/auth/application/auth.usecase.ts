@@ -1,5 +1,5 @@
-import { User } from '../../user/domain/entities/user.entity';
 import bcrypt from 'bcryptjs';
+import { IUser } from '../../user/domain/user.interface';
 import { AuthRepository } from '../domain/repositories/auth.repository';
 import { Tokens } from './auth.service';
 import { RoleTokenDto } from './role-token.dto';
@@ -7,10 +7,10 @@ import { RoleTokenDto } from './role-token.dto';
 export class AuthUseCase {
 	constructor(private readonly repository: AuthRepository) {}
 
-	async login(user: User) {
-		const response: User = await this.repository.login(user);
+	async login(user: Partial<IUser>) {
+		const response: IUser = await this.repository.login(user);
 		const { name, roles, password, refreshToken } = response;
-		const userMatched = { name, roles, password, refreshToken };
+		const userMatched: Partial<IUser> = { name, roles, password, refreshToken };
 
 		const userRoles = RoleTokenDto(userMatched.roles);
 		userMatched.roles = userRoles;

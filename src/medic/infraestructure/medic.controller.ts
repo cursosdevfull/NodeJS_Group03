@@ -1,9 +1,9 @@
+import { Medic } from '../../entities/medic.model';
 import { MedicUseCase } from '../application/medic.usecase';
-import { Medic } from '../domain/entities/medic.entity';
 export class MedicController {
 	constructor(private readonly medicUseCase: MedicUseCase) {}
 
-	async insert(medic: Medic) {
+	async insert(medic: Partial<Medic>) {
 		return this.medicUseCase.insert(medic);
 	}
 
@@ -11,7 +11,7 @@ export class MedicController {
 		return this.medicUseCase.getAll(isActive);
 	}
 
-	async getOne(id: string | number) {
+	async getOne(id: number) {
 		return this.medicUseCase.getOne(id);
 	}
 
@@ -19,12 +19,15 @@ export class MedicController {
 		return this.medicUseCase.getByPage(page);
 	}
 
-	async update(id: string | number, medic: Medic) {
-		console.log('medic', medic);
+	async update(id: number, medic: Medic) {
 		return this.medicUseCase.update(id, medic);
 	}
 
-	async delete(id: string | number) {
+	async delete(id: number) {
 		return this.medicUseCase.delete(id);
+	}
+
+	async getAllData(roleName: string) {
+		return this.medicUseCase.getAllData(roleName);
 	}
 }
