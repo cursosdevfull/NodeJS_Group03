@@ -10,6 +10,7 @@ import { clearRedis } from './bootstrap/redis.bootstrap';
 
 const app = express();
 multer();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 /* app.use(bodyParser.json());
@@ -20,7 +21,7 @@ app.use('/users', RouterUser);
 app.use('/roles', RouterRole);
 app.use('/auth', RouterAuth);
 
-app.get('/health-check', (req, res) => res.send('I am alive'));
+app.get('/health-check', (req, res) => res.send('Estoy funcionando bien'));
 
 app.get('/clear', async (req, res) => {
 	await clearRedis();
