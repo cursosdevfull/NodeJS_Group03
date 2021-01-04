@@ -21,7 +21,7 @@ describe('medic.usecase', () => {
 	});
 
 	/*     beforeEach(() => {
-		console.log('Se ejecuta antes de cada test');
+		dock('Se ejecuta antes de cada test');
 	}); */
 
 	it('insert', async () => {

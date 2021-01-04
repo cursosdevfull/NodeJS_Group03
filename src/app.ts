@@ -10,10 +10,10 @@ import { clearRedis } from './bootstrap/redis.bootstrap';
 
 const app = express();
 multer();
-/* app.use(express.json());
-app.use(express.urlencoded({ extended: true })); */
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+/* app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); */
 
 app.use('/medics', RouterMedic);
 app.use('/users', RouterUser);

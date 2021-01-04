@@ -11,18 +11,19 @@ export default class Database implements DatabaseRepository {
 	async initialize(): Promise<any> {
 		const promiseInitialize = new Promise((resolve, reject) => {
 			const parametersConnection = {
-				type: env.TYPEORM.TYPE,
-				host: env.TYPEORM.HOST,
-				username: env.TYPEORM.USERNAME,
-				password: env.TYPEORM.PASSWORD,
-				database: env.TYPEORM.DATABASE,
-				port: env.TYPEORM.PORT,
-				entities: [env.TYPEORM.ENTITIES],
-				synchronize: env.TYPEORM.SYNCHRONIZE,
+				type: env.DATABASE.TYPEORM.TYPE,
+				host: env.DATABASE.TYPEORM.HOST,
+				username: env.DATABASE.TYPEORM.USERNAME,
+				password: env.DATABASE.TYPEORM.PASSWORD,
+				database: env.DATABASE.TYPEORM.DATABASE,
+				port: env.DATABASE.TYPEORM.PORT,
+				entities: [env.DATABASE.TYPEORM.ENTITIES],
+				synchronize: env.DATABASE.TYPEORM.SYNCHRONIZE,
 			};
 
 			createConnection(parametersConnection)
 				.then(connection => {
+					console.log('Connected');
 					client = connection;
 					resolve(true);
 				})

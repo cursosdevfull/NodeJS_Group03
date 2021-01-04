@@ -4,4 +4,8 @@ export class UserOperation extends GenericDatabaseRepository<User> {
 	constructor() {
 		super(User);
 	}
+
+	async getAllData(roleName: string): Promise<any> {
+		return Promise.resolve([]);
+	}
 }

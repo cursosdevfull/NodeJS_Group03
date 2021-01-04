@@ -1,6 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+	Column,
+	Entity,
+	JoinTable,
+	ManyToMany,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Role } from './role.model';
-
 @Entity({ name: 'user' })
 export class User {
 	@PrimaryGeneratedColumn()
@@ -24,6 +29,7 @@ export class User {
 	@Column('varchar', { length: 100 })
 	photo: string;
 
-	@OneToMany(type => Role, role => role.user)
+	@ManyToMany(() => Role)
+	@JoinTable()
 	roles: Role[];
 }

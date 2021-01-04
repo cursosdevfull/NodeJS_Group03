@@ -6,12 +6,12 @@ import app from './app';
 const start = async () => {
 	const server = new Server(app);
 	const database = new Database();
-	const redis = new Redis();
+	// const redis = new Redis();
 
 	try {
 		await server.initialize();
 		await database.initialize();
-		await redis.initialize();
+		// await redis.initialize();
 	} catch (error) {
 		console.log(error);
 		database.disconnect();

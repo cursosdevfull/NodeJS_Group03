@@ -1,5 +1,8 @@
 import IORedis from 'ioredis';
 import { DatabaseRepository } from '../interfaces/database.interface';
+import yenv from 'yenv';
+
+const env = yenv();
 
 let clientConnection: any;
 
@@ -32,9 +35,9 @@ export default class Redis implements DatabaseRepository {
 	async initialize(): Promise<any> {
 		const promise = new Promise((resolve, reject) => {
 			this.client = new IORedis({
-				host: '127.0.0.1',
-				port: 6379,
-				password: 'todovale',
+				host: env.DATABASE.REDIS.HOST,
+				port: env.DATABASE.REDIS.PORT,
+				/* 				password: 'todovale', */
 				retryStrategy(times) {
 					const delay = Math.min(times * 100, 2000);
 					return delay;
