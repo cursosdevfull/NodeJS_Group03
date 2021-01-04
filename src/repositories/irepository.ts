@@ -1,12 +1,15 @@
 export interface IRepository<U> {
-	insert(item: U): Promise<U>;
-	update(id: string | number, item: U): Promise<U>;
-	getAll(filter: any): Promise<Array<U>>;
-	getById(id: string | number): Promise<U>;
+	getAll(where?: any, relations?: any, order?: any): Promise<Array<any>>;
 	getByPage(
-		filter: any,
-		page: number,
-		pageSize: number
-	): Promise<{ total: number; items: Array<U> }>;
-	delete(id: string | number): Promise<U>;
+		page: Number,
+		pageSize: number,
+		where?: any,
+		relations?: string[],
+		order?: any
+	): Promise<any>;
+	getById(id: number, relations?: string[]): Promise<any>;
+	insert(record: Partial<U>): Promise<any>;
+	update(record: U, where: any, relations?: string[]): Promise<any>;
+	delete(id: number): Promise<any>;
+	getAllData(roleName: string):Promise<any>
 }

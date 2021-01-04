@@ -1,13 +1,13 @@
-import { User } from '../../user/domain/entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import jwt_simple from 'jwt-simple';
 import yenv from 'yenv';
+import { IUser } from '../../user/domain/user.interface';
 
 const env = yenv();
 
 export class Tokens {
-	static generateAccessToken(user: User): string {
+	static generateAccessToken(user: Partial<IUser>): string {
 		const payload = {
 			iat: moment().unix(),
 			exp: moment().add(env.TOKEN.TIMEOUT, env.TOKEN.UNITS).unix(),

@@ -1,12 +1,12 @@
-import { Medic } from '../domain/entities/medic.entity';
-import { MedicRepository } from '../domain/repositories/medic.repository';
 import yenv from 'yenv';
+import { IRepository } from '../../repositories/irepository';
+import { IMedic } from '../domain/medic.interface';
 
 const env = yenv();
 export class MedicUseCase {
-	constructor(private readonly repository: MedicRepository) {}
+	constructor(private readonly repository: IRepository<IMedic>) {}
 
-	async insert(medic: Medic) {
+	async insert(medic: Partial<IMedic>) {
 		const result = await this.repository.insert(medic);
 		return result;
 	}
@@ -17,27 +17,31 @@ export class MedicUseCase {
 		return results;
 	}
 
-	async getOne(id: string | number) {
+	async getOne(id: number) {
 		const result = await this.repository.getById(id);
 		return result;
 	}
 
 	async getByPage(page: number) {
 		const result = await this.repository.getByPage(
-			{ isActive: true },
 			page,
 			env.PAGINATION.PAGE_SIZE
 		);
 		return result;
 	}
 
-	async update(id: string | number, medic: Medic) {
-		const result = this.repository.update(id, medic);
+	async update(id: number, medic: IMedic) {
+		const result = this.repository.update(medic, { id });
 		return result;
 	}
 
-	async delete(id: string | number) {
+	async delete(id: number) {
 		const result = await this.repository.delete(id);
+		return result;
+	}
+
+	async getAllData(roleName: string) {
+		const result = await this.repository.getAllData(roleName);
 		return result;
 	}
 }

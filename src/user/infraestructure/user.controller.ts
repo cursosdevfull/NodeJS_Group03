@@ -1,9 +1,10 @@
+import { Console } from 'console';
+import { User } from '../../entities/user.model';
 import { UserUseCase } from '../application/user.usercase';
-import { User } from '../domain/entities/user.entity';
 export class UserController {
 	constructor(private readonly userUseCase: UserUseCase) {}
 
-	async insert(user: User) {
+	async insert(user: Partial<User>) {
 		return this.userUseCase.insert(user);
 	}
 
@@ -11,7 +12,7 @@ export class UserController {
 		return this.userUseCase.getAll(isActive);
 	}
 
-	async getOne(id: string | number) {
+	async getOne(id: number) {
 		return this.userUseCase.getOne(id);
 	}
 
@@ -19,11 +20,11 @@ export class UserController {
 		return this.userUseCase.getByPage(page);
 	}
 
-	async update(id: string | number, user: User) {
+	async update(id: number, user: User) {
 		return this.userUseCase.update(id, user);
 	}
 
-	async delete(id: string | number) {
+	async delete(id: number) {
 		return this.userUseCase.delete(id);
 	}
 }

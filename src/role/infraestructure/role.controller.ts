@@ -1,9 +1,9 @@
 import { RoleUseCase } from '../application/role.usecase';
-import { Role } from '../domain/entities/role.entity';
+import { IRole } from '../domain/role.interface';
 export class RoleController {
 	constructor(private readonly roleUseCase: RoleUseCase) {}
 
-	async insert(role: Role) {
+	async insert(role: Partial<IRole>) {
 		return this.roleUseCase.insert(role);
 	}
 
@@ -11,7 +11,7 @@ export class RoleController {
 		return this.roleUseCase.getAll(isActive);
 	}
 
-	async getOne(id: string | number) {
+	async getOne(id: number) {
 		return this.roleUseCase.getOne(id);
 	}
 
@@ -19,11 +19,11 @@ export class RoleController {
 		return this.roleUseCase.getByPage(page);
 	}
 
-	async update(id: string | number, role: Role) {
+	async update(id: number, role: IRole) {
 		return this.roleUseCase.update(id, role);
 	}
 
-	async delete(id: string | number) {
+	async delete(id: number) {
 		return this.roleUseCase.delete(id);
 	}
 }

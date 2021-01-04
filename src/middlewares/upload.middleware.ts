@@ -9,8 +9,8 @@ const env = yenv();
 AWS.config.update({ region: 'us-east-2' });
 
 const s3 = new AWS.S3({
-	accessKeyId: 'AKIAUDXASLVFOEHFXOUD',
-	secretAccessKey: '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',
+	accessKeyId: 'AKIAUDXASLVFBDYMGUOQ',
+	secretAccessKey: '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',
 });
 
 export class Upload {
@@ -21,7 +21,6 @@ export class Upload {
 				bucket: env.AWS.S3.BUCKET_NAME,
 				acl: 'public-read',
 				metadata(req, file, cb) {
-					console.log(req.files);
 					cb(null, { fieldName: file.fieldname });
 				},
 				key(req: any, file, cb) {

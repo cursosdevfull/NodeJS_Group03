@@ -1,7 +1,6 @@
 import express from 'express';
 import { UserOperation } from './user.operation';
 import { UserController } from './user.controller';
-import { User } from '../domain/entities/user.entity';
 import SchemaValidator from '../../validators/schema.validator';
 import { schemas as UserSchema } from './user.schema';
 import { Errors } from '../../helpers/errors.helper';
@@ -9,9 +8,12 @@ import { UserUseCase } from '../application/user.usercase';
 import { AuthenticationGuard } from '../../guards/authentication.guard';
 import { AuthorizationGuard } from '../../guards/authorization.guard';
 import { Upload } from '../../middlewares/upload.middleware';
+import { RoleOperation } from '../../role/infraestructure/role.operation';
+import { User } from '../../entities/user.model';
 
 const userOperation = new UserOperation();
-const userUseCase = new UserUseCase(userOperation);
+const roleOperation = new RoleOperation();
+const userUseCase = new UserUseCase(userOperation, roleOperation);
 const userController = new UserController(userUseCase);
 
 const router = express.Router();
@@ -32,7 +34,7 @@ router.get(
 	AuthorizationGuard.canActivate('ADMIN'),
 	SchemaValidator.validate(UserSchema.GET_ONE),
 	Errors.asyncError(async (req, res) => {
-		const id = req.params.id;
+		const id = +req.params.id;
 		const result = await userController.getOne(id);
 		res.json(result);
 	})
@@ -52,14 +54,13 @@ router.get(
 
 router.post(
 	'/',
-	AuthenticationGuard.canActivate,
-	AuthorizationGuard.canActivate('ADMIN'),
+	/* 	AuthenticationGuard.canActivate,
+	AuthorizationGuard.canActivate('ADMIN'), */
 	Upload.S3('photo'),
 	SchemaValidator.validate(UserSchema.POST_INSERT),
 	Errors.asyncError(async (req, res) => {
-		console.log(req.body);
 		const { name, email, password, roles, photo } = req.body;
-		const user: User = {
+		const user: Partial<User> = {
 			name,
 			email,
 			password,
@@ -79,7 +80,7 @@ router.put(
 	SchemaValidator.validate(UserSchema.UPDATE),
 	Errors.asyncError(async (req, res) => {
 		const medic: User = req.body;
-		const id = req.params.id;
+		const id = +req.params.id;
 		const result = await userController.update(id, medic);
 		res.json(result);
 	})
@@ -91,7 +92,7 @@ router.delete(
 	AuthorizationGuard.canActivate('ADMIN'),
 	SchemaValidator.validate(UserSchema.DELETE),
 	Errors.asyncError(async (req, res) => {
-		const id = req.params.id;
+		const id = +req.params.id;
 		const result = await userController.delete(id);
 		res.json(result);
 	})

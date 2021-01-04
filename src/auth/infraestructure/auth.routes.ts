@@ -1,6 +1,6 @@
 import express from 'express';
 import { Errors } from '../../helpers/errors.helper';
-import { User } from '../../user/domain/entities/user.entity';
+import { IUser } from '../../user/domain/user.interface';
 import SchemaValidator from '../../validators/schema.validator';
 import { AuthUseCase } from '../application/auth.usecase';
 import { AuthController } from './auth.controller';
@@ -18,7 +18,7 @@ router.post(
 	SchemaValidator.validate(AuthSchema.LOGIN),
 	Errors.asyncError(async (req, res) => {
 		const { email, password } = req.body;
-		const user: User = {
+		const user: Partial<IUser> = {
 			email,
 			password,
 		};
